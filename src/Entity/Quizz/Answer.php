@@ -18,7 +18,7 @@ class Answer
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text")
      */
     private $value;
 
@@ -50,7 +50,7 @@ class Answer
         return $this;
     }
 
-    public function getIsCorrect(): ?bool
+    public function isCorrect(): ?bool
     {
         return $this->isCorrect;
     }
