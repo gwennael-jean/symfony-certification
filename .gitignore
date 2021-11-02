@@ -3,6 +3,13 @@
 /nbproject/
 ###< IDE ###
 
+###> Docker ###
+/.docker/.env
+/.docker/dockerfiles/database/data/
+/.docker/dockerfiles/database/import/
+/.bash_history
+###< Docker ###
+
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php
