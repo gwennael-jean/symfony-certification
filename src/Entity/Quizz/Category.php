@@ -7,7 +7,6 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=CategoryRepository::class)
- * @ORM\Table(name="quizz_catgory")
  */
 class Category
 {

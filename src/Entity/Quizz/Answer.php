@@ -7,7 +7,6 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=AnswerRepository::class)
- * @ORM\Table(name="quizz_answer")
  */
 class Answer
 {
