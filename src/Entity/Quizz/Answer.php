@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=AnswerRepository::class)
+ * @ORM\Table(name="quizz_answer")
  */
 class Answer
 {
@@ -18,7 +19,7 @@ class Answer
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text")
      */
     private $value;
 
@@ -50,7 +51,7 @@ class Answer
         return $this;
     }
 
-    public function getIsCorrect(): ?bool
+    public function isCorrect(): ?bool
     {
         return $this->isCorrect;
     }

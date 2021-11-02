@@ -39,12 +39,9 @@ abstract class AbstractFixture extends Fixture implements ContainerAwareInterfac
 
     protected function getData()
     {
-        $data = $this->container->getParameter('fixture');
-        $data['data_folder'] = $data['data_folder'] ?? 'data';
-
         return Yaml::parse(file_get_contents(implode(DIRECTORY_SEPARATOR, [
             $this->getAssetsPath(),
-            $data['data_folder'],
+            'data',
             trim($this->getYamlPath())
         ])));
     }
