@@ -2,6 +2,10 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Quizz\Category;
+use App\Entity\Quizz\Question;
+use App\Entity\Quizz\UserQuizz;
+use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -27,6 +31,12 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');
-        // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
+
+         yield MenuItem::section('Users');
+         yield MenuItem::linkToCrud('User List', 'fas fa-users', User::class);
+
+         yield MenuItem::section('Quizz');
+         yield MenuItem::linkToCrud('Category List', 'fas fa-certificate', Category::class);
+         yield MenuItem::linkToCrud('Question List', 'fas fa-question-circle', Question::class);
     }
 }
