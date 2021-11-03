@@ -25,7 +25,7 @@ class Question
     private $value;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Category::class, cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity=Category::class, cascade={"persist"}, inversedBy="questions")
      * @ORM\JoinColumn(nullable=false)
      */
     private $category;
@@ -75,6 +75,14 @@ class Question
     public function getAnswers(): Collection
     {
         return $this->answers;
+    }
+
+    /**
+     * @return int
+     */
+    public function countAnswers(): int
+    {
+        return $this->getAnswers()->count();
     }
 
     public function addAnswer(Answer $answer): self
