@@ -44,13 +44,13 @@ class RegistrationController extends AbstractController
                     ->from(new Address('gwennael.jean@gmail.com', 'Gwennael Jean'))
                     ->to($user->getEmail())
                     ->subject('Please Confirm your Email')
-                    ->htmlTemplate('registration/confirmation_email.html.twig')
+                    ->htmlTemplate('security/registration/confirmation_email.html.twig')
             );
 
             return $this->redirectToRoute('security_login');
         }
 
-        return $this->render('registration/register.html.twig', [
+        return $this->render('security/registration/register.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
     }
