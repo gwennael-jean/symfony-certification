@@ -36,7 +36,7 @@ class Question
     private $answers;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Domain::class, mappedBy="questions")
+     * @ORM\ManyToMany(targetEntity=Domain::class, mappedBy="questions", cascade={"persist"})
      */
     private $domains;
 
