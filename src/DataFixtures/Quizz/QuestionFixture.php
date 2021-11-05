@@ -12,14 +12,6 @@ use Doctrine\Persistence\ObjectManager;
 
 abstract class QuestionFixture extends AbstractFixture
 {
-    private ArrayCollection $domains;
-
-    public function __construct()
-    {
-        parent::__construct();
-        $this->domains = new ArrayCollection();
-    }
-
     public function load(ObjectManager $manager)
     {
         $data = $this->getData();
@@ -52,14 +44,14 @@ abstract class QuestionFixture extends AbstractFixture
     {
         $domains = new ArrayCollection();
         foreach ($this->getDomainNames() as $name) {
-            if (!$this->domains->containsKey($name)) {
+            if (!$this->hasReference('domain.' . $name)) {
                 $domain = (new Domain())
                     ->setName($name);
 
-                $this->domains->set($name, $domain);
+                $this->addReference('domain.' . $name, $domain);
             }
 
-            $domains->add($this->domains->get($this->getDomainName()));
+            $domains->add($this->getReference('domain.' . $name));
         }
 
         return $domains;
