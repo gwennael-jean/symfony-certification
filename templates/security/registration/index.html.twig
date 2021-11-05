@@ -10,10 +10,12 @@
             </h1>
 
             {% for flashError in app.flashes('verify_email_error') %}
-                <div class="alert alert-error" role="alert">{{ flashError }}</div>
+                <div class="alert alert-error" role="alert">
+                    {{ flashError }}
+                </div>
             {% endfor %}
 
-            {{ form(registrationForm) }}
+            {{ form(form) }}
         </div>
     </div>
 {% endblock %}
