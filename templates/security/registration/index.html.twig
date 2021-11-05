@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    <div class="h-screen w-full grid justify-items-center">
+        <div class="authentication-form">
+            <h1 class="text-center">
+                {% trans %}Register{% endtrans %}
+            </h1>
+
+            {% for flashError in app.flashes('verify_email_error') %}
+                <div class="alert alert-error" role="alert">
+                    {{ flashError }}
+                </div>
+            {% endfor %}
+
+            {{ form_start(form) }}
+                <div class="mb-2">
+                    {{ form_label(form.email, null, {label_attr: { class: 'block'}}) }}
+                    {{ form_widget(form.email) }}
+                </div>
+                <div class="mb-2">
+                    {{ form_label(form.plainPassword, null, {label_attr: { class: 'block'}}) }}
+                    {{ form_widget(form.plainPassword) }}
+                </div>
+                <div class="mb-2">
+                    {{ form_widget(form.agreeTerms) }}
+                    {{ form_label(form.agreeTerms) }}
+                </div>
+
+                <button type="submit" class="btn btn-success block mx-auto mt-3">
+                    {% trans %}Register{% endtrans %}
+                </button>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

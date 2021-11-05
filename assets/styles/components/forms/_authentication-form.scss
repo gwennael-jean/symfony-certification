@@ -1,0 +1,16 @@
+@layer components {
+  .authentication-form {
+    @apply block m-auto border border-white rounded p-5;
+
+    form {
+
+      label {
+        @apply text-white;
+      }
+
+      input[type=text], input[type=password] {
+        @apply rounded p-2 shadow-md focus:shadow-xl text-gray-500;
+      }
+    }
+  }
+}

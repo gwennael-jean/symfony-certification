@@ -2,13 +2,21 @@
 
 namespace App\Controller\Security;
 
+use App\Form\Security\AuthenticationFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormFactory;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class AuthenticationController extends AbstractController
 {
+    public function __construct(
+        private FormFactoryInterface $formFactory
+    ) {
+    }
+
     /**
      * @Route("/connexion", name="security_login")
      */
@@ -18,8 +26,12 @@ class AuthenticationController extends AbstractController
             return $this->redirectToRoute('dashboard');
         }
 
-        return $this->render('security/login.html.twig', [
-            'last_username' => $authenticationUtils->getLastUsername(),
+        $form = $this->formFactory->createNamed('', AuthenticationFormType::class, null, [
+            'authenticationUtils' => $authenticationUtils
+        ]);
+
+        return $this->render('security/authentication/index.html.twig', [
+            'form' => $form->createView(),
             'error' => $authenticationUtils->getLastAuthenticationError()
         ]);
     }

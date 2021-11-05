@@ -1,0 +1,13 @@
+@layer components {
+  .btn {
+    @apply rounded;
+
+    &.btn-primary {
+      @apply bg-primary text-white p-2;
+    }
+
+    &.btn-success {
+      @apply bg-success text-white p-2;
+    }
+  }
+}

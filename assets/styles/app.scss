@@ -2,8 +2,9 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-$body: lightgray;
+@import "base/body";
+@import "base/title";
 
-body {
-  background-color: $body;
-}
+@import "components/forms/authentication-form";
+@import "components/alerts";
+@import "components/buttons";

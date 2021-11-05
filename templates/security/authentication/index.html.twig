@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+    <div class="h-screen w-full grid justify-items-center">
+        <div class="authentication-form">
+            <h1 class="text-center">
+                {% trans %}Sign in{% endtrans %}
+            </h1>
+
+            {% if error %}
+                <div class="alert alert-error">
+                    {{ error.messageKey | trans(error.messageData, 'security') }}
+                </div>
+            {% endif %}
+
+            {{ form_start(form) }}
+                <div class="mb-2">
+                    {{ form_label(form.email, null, {label_attr: { class: 'block'}}) }}
+                    {{ form_widget(form.email) }}
+                </div>
+
+                <div class="mb-2">
+                    {{ form_label(form.password, null, {label_attr: { class: 'block'}}) }}
+                    {{ form_widget(form.password) }}
+                </div>
+
+                <button type="submit" class="btn btn-success block mx-auto mt-3">
+                    {% trans %}Sign in{% endtrans %}
+                </button>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}
