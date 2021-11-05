@@ -1,0 +1,9 @@
+@layer components {
+  .alert {
+    @apply  border-b-2 p-2;
+
+    &.alert-error {
+      @apply bg-red-light border-red-dark;
+    }
+  }
+}
