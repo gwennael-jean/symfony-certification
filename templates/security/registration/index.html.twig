@@ -15,7 +15,24 @@
                 </div>
             {% endfor %}
 
-            {{ form(form) }}
+            {{ form_start(form) }}
+                <div class="mb-2">
+                    {{ form_label(form.email, null, {label_attr: { class: 'block'}}) }}
+                    {{ form_widget(form.email) }}
+                </div>
+                <div class="mb-2">
+                    {{ form_label(form.plainPassword, null, {label_attr: { class: 'block'}}) }}
+                    {{ form_widget(form.plainPassword) }}
+                </div>
+                <div class="mb-2">
+                    {{ form_widget(form.agreeTerms) }}
+                    {{ form_label(form.agreeTerms) }}
+                </div>
+
+                <button type="submit" class="btn btn-success block mx-auto mt-3">
+                    {% trans %}Register{% endtrans %}
+                </button>
+            {{ form_end(form) }}
         </div>
     </div>
 {% endblock %}
