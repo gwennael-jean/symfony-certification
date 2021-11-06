@@ -7,6 +7,7 @@ use App\Repository\Quizz\UserQuizzRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserQuizzRepository::class)
@@ -32,7 +33,7 @@ class UserQuizz
     private $quizz;
 
     /**
-     * @ORM\OneToMany(targetEntity=UserQuestion::class, mappedBy="userQuizz", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=UserQuestion::class, mappedBy="userQuizz", orphanRemoval=true, cascade={"persist"})
      */
     private $userQuestions;
 
@@ -46,12 +47,12 @@ class UserQuizz
         return $this->id;
     }
 
-    public function getUser(): ?User
+    public function getUser(): ?UserInterface
     {
         return $this->user;
     }
 
-    public function setUser(?User $user): self
+    public function setUser(?UserInterface $user): self
     {
         $this->user = $user;
 
