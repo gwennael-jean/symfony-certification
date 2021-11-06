@@ -4,22 +4,25 @@ namespace App\Service;
 
 use App\Entity\Quizz\Domain;
 use App\Entity\Quizz\Quizz;
-use App\Repository\Quizz\QuestionRepository;
+use App\Entity\Quizz\UserQuizz;
+use App\Service\UserQuizzGenerator\UserQuizzByDomainGenerator;
 
 class UserQuizzGenerator implements UserQuizzGeneratorInterface
 {
     public function __construct(
-        private QuestionRepository $questionRepository
+        private UserQuizzByDomainGenerator $userQuizzByDomainGenerator
     )
     {
     }
 
-    public function generate(Domain $domain)
+    public function generateByDomain(Domain $domain): UserQuizz
     {
-        // TODO: Implement generate() method.
+        $this->userQuizzByDomainGenerator->setDomain($domain);
+
+        return $this->userQuizzByDomainGenerator->generate();
     }
 
-    public function generateByQuizz(Quizz $quizz)
+    public function generateByQuizz(Quizz $quizz): UserQuizz
     {
         // TODO: Implement generateByQuizz() method.
     }
