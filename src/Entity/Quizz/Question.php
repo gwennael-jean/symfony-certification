@@ -123,7 +123,11 @@ class Question
 
     public function setDomains(Collection $domains): self
     {
-        $this->domains = $domains;
+        $this->domains->clear();
+
+        foreach ($domains as $domain) {
+            $this->addDomain($domain);
+        }
 
         return $this;
     }
