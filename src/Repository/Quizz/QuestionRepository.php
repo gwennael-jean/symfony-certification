@@ -2,6 +2,7 @@
 
 namespace App\Repository\Quizz;
 
+use App\Entity\Quizz\Domain;
 use App\Entity\Quizz\Question;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -19,22 +20,19 @@ class QuestionRepository extends ServiceEntityRepository
         parent::__construct($registry, Question::class);
     }
 
-    // /**
-    //  * @return Question[] Returns an array of Question objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @return Question[] Returns an array of random Question objects
+     */
+    public function findRandomByDomain(Domain $domain)
     {
         return $this->createQueryBuilder('q')
-            ->andWhere('q.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('q.id', 'ASC')
+            ->andWhere(':domain MEMBER OF q.domains')
+            ->setParameter('domain', $domain)
+            ->orderBy('RAND()')
             ->setMaxResults(10)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
-    */
 
     /*
     public function findOneBySomeField($value): ?Question

@@ -5,7 +5,9 @@ namespace App\DataFixtures\Quizz;
 use App\DataFixtures\AbstractFixture;
 use App\Entity\Quizz\Answer;
 use App\Entity\Quizz\Category;
+use App\Entity\Quizz\Domain;
 use App\Entity\Quizz\Question;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Persistence\ObjectManager;
 
 abstract class QuestionFixture extends AbstractFixture
@@ -30,9 +32,30 @@ abstract class QuestionFixture extends AbstractFixture
                 $question->addAnswer($answer);
             }
 
+            $question->setDomains($this->getDomains());
+
             $manager->persist($question);
         }
 
         $manager->flush();
     }
+
+    private function getDomains(): ArrayCollection
+    {
+        $domains = new ArrayCollection();
+        foreach ($this->getDomainNames() as $name) {
+            if (!$this->hasReference('domain.' . $name)) {
+                $domain = (new Domain())
+                    ->setName($name);
+
+                $this->addReference('domain.' . $name, $domain);
+            }
+
+            $domains->add($this->getReference('domain.' . $name));
+        }
+
+        return $domains;
+    }
+
+    abstract protected function getDomainNames(): array;
 }

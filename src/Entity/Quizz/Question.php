@@ -35,9 +35,15 @@ class Question
      */
     private $answers;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Domain::class, mappedBy="questions", cascade={"persist"})
+     */
+    private $domains;
+
     public function __construct()
     {
         $this->answers = new ArrayCollection();
+        $this->domains = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -102,6 +108,44 @@ class Question
             if ($answer->getQuestion() === $this) {
                 $answer->setQuestion(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Domain[]
+     */
+    public function getDomains(): Collection
+    {
+        return $this->domains;
+    }
+
+    public function setDomains(Collection $domains): self
+    {
+        $this->domains->clear();
+
+        foreach ($domains as $domain) {
+            $this->addDomain($domain);
+        }
+
+        return $this;
+    }
+
+    public function addDomain(Domain $domain): self
+    {
+        if (!$this->domains->contains($domain)) {
+            $this->domains[] = $domain;
+            $domain->addQuestion($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDomain(Domain $domain): self
+    {
+        if ($this->domains->removeElement($domain)) {
+            $domain->removeQuestion($this);
         }
 
         return $this;
