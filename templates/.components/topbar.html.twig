@@ -1,0 +1,8 @@
+<nav class="w-full fixed flex justify-end p-3">
+    {% if is_granted('ROLE_USER') %}
+        <a href="{{ path('security_logout') }}" class="btn btn-primary">{% trans %}Logout{% endtrans %}</a>
+    {% else %}
+        <a href="{{ path('security_login') }}" class="btn btn-primary">{% trans %}Login{% endtrans %}</a>
+        <a href="{{ path('security_register') }}" class="btn btn-primary">{% trans %}Register{% endtrans %}</a>
+    {% endif %}
+</nav>

@@ -3,9 +3,13 @@
 {% block title %}Hello DashboardController!{% endblock %}
 
 {% block body %}
-    {% for domain in domains %}
-        <a href="{{ path('userquizz_generate_by_domain', { id: domain.id }) }}">
-            {% trans %}Generate a quizz{% endtrans %} {{ domain.name }}
-        </a>
-    {% endfor %}
+    {% include '.components/topbar.html.twig' %}
+
+    <div class="main">
+        {% for domain in domains %}
+            <a href="{{ path('userquizz_generate_by_domain', { id: domain.id }) }}" class="btn btn-primary">
+                {% trans %}Generate a quizz{% endtrans %} {{ domain.name }}
+            </a>
+        {% endfor %}
+    </div>
 {% endblock %}
