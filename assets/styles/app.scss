@@ -2,9 +2,16 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+@import "~@fortawesome/fontawesome-free/scss/fontawesome";
+@import '~@fortawesome/fontawesome-free/scss/solid';
+
 @import "base/body";
 @import "base/title";
 
 @import "components/forms/authentication-form";
 @import "components/alerts";
 @import "components/buttons";
+
+.main {
+ padding-top: 64px !important;
+}
