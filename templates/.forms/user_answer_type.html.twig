@@ -1,0 +1,15 @@
+{% block user_answers_row %}
+    {{ form_errors(form) }}
+    {{ form_widget(form) }}
+{% endblock %}
+
+{% block user_answers_widget %}
+    {% for answer in answers %}
+        <div>
+            <label>
+                <input type="checkbox" name="{{ full_name }}[]" value="{{ answer.id }}" {% if answer.id in value %}checked{% endif%} />
+                {{ answer.value }}
+            </label>
+        </div>
+    {% endfor %}
+{% endblock %}

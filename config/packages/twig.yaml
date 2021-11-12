@@ -1,6 +1,9 @@
 twig:
     default_path: '%kernel.project_dir%/templates'
-
+    form_themes:
+      - .forms/layout.html.twig
+      - .forms/user_question_type.html.twig
+      - .forms/user_answer_type.html.twig
 when@test:
     twig:
         strict_variables: true

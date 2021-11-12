@@ -3,7 +3,11 @@
 {% block title %}Hello DashboardController!{% endblock %}
 
 {% block body %}
-    {% for userQuestion in userQuizz.userQuestions %}
-        {# TODO Affichage de la question #}
-    {% endfor %}
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
+        {{ form_row(form) }}
+        <button type="submit" class="btn btn-primary">
+            Finish
+        </button>
+    {{ form_end(form) }}
 {% endblock %}
