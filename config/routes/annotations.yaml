@@ -5,3 +5,8 @@ controllers:
 kernel:
     resource: ../../src/Kernel.php
     type: annotation
+
+quizz_controllers:
+    resource: ../../src/Controller/Quizz
+    type: annotation
+    prefix: /quizz

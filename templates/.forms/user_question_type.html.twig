@@ -1,0 +1,11 @@
+{% block user_question_row %}
+    {{ form_errors(form) }}
+    <div class="question mb-5">
+        <label class="mb-2">
+            {{ question.value }}
+        </label>
+        <div class="aswers">
+            {{ form_widget(form) }}
+        </div>
+    </div>
+{% endblock %}
