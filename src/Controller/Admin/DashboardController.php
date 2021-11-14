@@ -3,8 +3,10 @@
 namespace App\Controller\Admin;
 
 use App\Controller\Admin\Quizz\QuestionCrudController;
+use App\Controller\Admin\Quizz\UserQuizzCrudController;
 use App\Entity\Quizz\Category;
 use App\Entity\Quizz\Question;
+use App\Entity\Quizz\UserQuizz;
 use App\Entity\User;
 use App\Repository\Quizz\QuestionRepository;
 use App\Repository\Quizz\UserQuizzRepository;
@@ -40,16 +42,20 @@ class DashboardController extends AbstractDashboardController
                         'menuIndex' => 2,
                     ]),
                 ],
-                'userquizz' => [
-                    'value' => $this->userQuizzRepository->countAll(),
-                    'link' => '#',
-                ],
                 'question' => [
                     'value' => $this->questionRepository->countAll(),
                     'link' => $this->generateUrl('admin', [
                         'crudControllerFqcn' => QuestionCrudController::class,
                         'crudAction' => 'index',
-                        'menuIndex' => 4,
+                        'menuIndex' => 5,
+                    ]),
+                ],
+                'userquizz' => [
+                    'value' => $this->userQuizzRepository->countAll(),
+                    'link' => $this->generateUrl('admin', [
+                        'crudControllerFqcn' => UserQuizzCrudController::class,
+                        'crudAction' => 'index',
+                        'menuIndex' => 6,
                     ]),
                 ],
             ]
@@ -73,5 +79,6 @@ class DashboardController extends AbstractDashboardController
          yield MenuItem::section('Quizz');
          yield MenuItem::linkToCrud('Category List', 'fas fa-certificate', Category::class);
          yield MenuItem::linkToCrud('Question List', 'fas fa-question-circle', Question::class);
+         yield MenuItem::linkToCrud('User Quizz List', 'fas fa-question-circle', UserQuizz::class);
     }
 }
