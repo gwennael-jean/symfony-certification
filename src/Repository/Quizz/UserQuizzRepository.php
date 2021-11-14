@@ -19,32 +19,11 @@ class UserQuizzRepository extends ServiceEntityRepository
         parent::__construct($registry, UserQuizz::class);
     }
 
-    // /**
-    //  * @return UserQuizz[] Returns an array of UserQuizz objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function countAll(): int
     {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('u.id', 'ASC')
-            ->setMaxResults(10)
+        return $this->createQueryBuilder('uq')
+            ->select('COUNT(uq)')
             ->getQuery()
-            ->getResult()
-        ;
+            ->getSingleScalarResult();
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?UserQuizz
-    {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

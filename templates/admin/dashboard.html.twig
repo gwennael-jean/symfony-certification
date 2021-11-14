@@ -1,0 +1,47 @@
+{# @var ea \EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext #}
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block main %}
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex">
+                        <div class="card-title flex-grow-1 fs-3">{% trans %}User Count{% endtrans %}</div>
+                        <div class="card-text fs-2">{{ count.user.value }}</div>
+                    </div>
+
+                    <a href="{{ count.user.link }}" class="card-link">
+                        {% trans %}Show all{% endtrans %}
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex">
+                        <div class="card-title flex-grow-1 fs-3">{% trans %}User Quizz Count{% endtrans %}</div>
+                        <div class="card-text fs-2">{{ count.userquizz.value }}</div>
+                    </div>
+                    <a href="#" class="card-link">
+                        {% trans %}Show all{% endtrans %}
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex">
+                        <div class="card-title flex-grow-1 fs-3">{% trans %}Question Count{% endtrans %}</div>
+                        <div class="card-text fs-2">{{ count.question.value }}</div>
+                    </div>
+                    <a href="#" class="card-link">
+                        {% trans %}Show all{% endtrans %}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
