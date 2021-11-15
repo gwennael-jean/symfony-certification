@@ -2,6 +2,7 @@
 
 namespace App\Controller\Quizz;
 
+use App\Entity\Quizz\UserQuizz;
 use App\Form\UserQuizzType;
 use App\Repository\Quizz\DomainRepository;
 use App\Repository\Quizz\UserQuizzRepository;
@@ -15,8 +16,8 @@ class UserQuizzController extends AbstractController
 {
     public function __construct(
         private UserQuizzGeneratorInterface $userQuizzGenerator,
-        private DomainRepository $domainRepository,
-        private UserQuizzRepository $userQuizzRepository,
+        private DomainRepository            $domainRepository,
+        private UserQuizzRepository         $userQuizzRepository,
     )
     {
     }
@@ -39,6 +40,7 @@ class UserQuizzController extends AbstractController
         }
 
         return $this->render('userquizz/index.html.twig', [
+            'userQuizz' => $userQuizz,
             'form' => $form->createView(),
         ]);
     }
@@ -56,6 +58,19 @@ class UserQuizzController extends AbstractController
 
         return $this->redirectToRoute('userquizz_index', [
             'id' => $userQuizz->getId()
+        ]);
+    }
+
+    #[Route('/user-quizz/{id}/update', name: 'userquizz_update', methods: ['POST'])]
+    public function update(Request $request, int $id): Response
+    {
+        $userQuizz = $this->userQuizzRepository->find($id);
+
+        $this->getDoctrine()->getManager()->persist($userQuizz);
+        $this->getDoctrine()->getManager()->flush();
+
+        return $this->json([
+            'success' => true
         ]);
     }
 }

@@ -13,6 +13,10 @@ import { Controller } from 'stimulus';
 export default class extends Controller {
     static targets = [ "question" ]
 
+    static values = {
+        userquizz: Number
+    }
+
     initialize() {
         this.index = 0
     }
@@ -21,14 +25,20 @@ export default class extends Controller {
         this.showCurrentQuestion()
     }
 
-    next() {
-        this.index++
-        this.showCurrentQuestion()
+    previous() {
+        if (this.index > 0) {
+            this.index--
+            this.showCurrentQuestion()
+            this.updateUserQuizz()
+        }
     }
 
-    previous() {
-        this.index--
-        this.showCurrentQuestion()
+    next() {
+        if (this.index < this.questionTargets.length - 1) {
+            this.index++
+            this.showCurrentQuestion()
+            this.updateUserQuizz()
+        }
     }
 
     showCurrentQuestion() {
@@ -37,5 +47,19 @@ export default class extends Controller {
                 ? element.classList.remove('hidden')
                 : element.classList.add('hidden')
         })
+    }
+
+    updateUserQuizz() {
+        let r = new XMLHttpRequest();
+
+        r.open("POST", `/quizz/user-quizz/${this.userquizzValue}/update`, true);
+        r.onreadystatechange = function () {
+            if (r.readyState !== 4 || r.status !== 200)
+                return;
+
+            console.log(r.responseText);
+        };
+
+        r.send("banana=yellow");
     }
 }
