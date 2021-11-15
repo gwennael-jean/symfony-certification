@@ -5,12 +5,12 @@
 {% block body %}
     <div class="container">
         {{ form_start(form) }}
-        <div class="card mt-0">
+        <div class="card mt-0" data-controller="userquizz">
             <div class="card-body">
                 {{ form_errors(form) }}
 
                 {% for userQuestionField in form.userQuestions %}
-                    <div class="question">
+                    <div class="question" data-userquizz-target="question">
                         <div class="card-title">
                             {{ userQuestionField.vars.question.value }}
                         </div>
@@ -21,6 +21,12 @@
                 {% endfor %}
             </div>
             <div class="card-links">
+                <button type="button" class="btn btn-secondary mr-2" data-action="userquizz#previous">
+                    Previous
+                </button>
+                <button type="button" class="btn btn-secondary mr-2" data-action="userquizz#next">
+                    Next
+                </button>
                 <button type="submit" class="btn btn-primary">
                     Finish
                 </button>
