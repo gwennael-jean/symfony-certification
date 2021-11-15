@@ -11,7 +11,9 @@
 @import "components/forms/authentication-form";
 @import "components/alerts";
 @import "components/buttons";
+@import "components/cards";
 
 .main {
+ @apply px-3;
  padding-top: 64px !important;
 }
