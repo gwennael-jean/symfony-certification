@@ -3,11 +3,27 @@
 {% block title %}Hello DashboardController!{% endblock %}
 
 {% block body %}
-    {{ form_start(form) }}
-        {{ form_errors(form) }}
-        {{ form_row(form) }}
-        <button type="submit" class="btn btn-primary">
-            Finish
-        </button>
-    {{ form_end(form) }}
+    <div class="container">
+        {{ form_start(form) }}
+        <div class="card mt-0">
+            <div class="card-body">
+                {{ form_errors(form) }}
+
+                {% for userQuestionField in form.userQuestions %}
+                    <div class="card-title">
+                        {{ userQuestionField.vars.question.value }}
+                    </div>
+                    <div class="card-text">
+                        {{ form_row(userQuestionField.answers) }}
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="card-links">
+                <button type="submit" class="btn btn-primary">
+                    Finish
+                </button>
+            </div>
+        </div>
+        {{ form_end(form) }}
+    </div>
 {% endblock %}
