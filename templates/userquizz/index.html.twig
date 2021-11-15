@@ -10,11 +10,13 @@
                 {{ form_errors(form) }}
 
                 {% for userQuestionField in form.userQuestions %}
-                    <div class="card-title">
-                        {{ userQuestionField.vars.question.value }}
-                    </div>
-                    <div class="card-text">
-                        {{ form_row(userQuestionField.answers) }}
+                    <div class="question">
+                        <div class="card-title">
+                            {{ userQuestionField.vars.question.value }}
+                        </div>
+                        <div class="card-text">
+                            {{ form_row(userQuestionField.answers) }}
+                        </div>
                     </div>
                 {% endfor %}
             </div>
