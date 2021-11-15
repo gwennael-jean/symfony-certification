@@ -20,10 +20,15 @@ class QuestionRepository extends ServiceEntityRepository
         parent::__construct($registry, Question::class);
     }
 
-    /**
-     * @return Question[] Returns an array of random Question objects
-     */
-    public function findRandomByDomain(Domain $domain)
+    public function countAll(): int
+    {
+        return $this->createQueryBuilder('q')
+            ->select('COUNT(q)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    public function findRandomByDomain(Domain $domain): array
     {
         return $this->createQueryBuilder('q')
             ->andWhere(':domain MEMBER OF q.domains')
@@ -33,16 +38,4 @@ class QuestionRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
-
-    /*
-    public function findOneBySomeField($value): ?Question
-    {
-        return $this->createQueryBuilder('q')
-            ->andWhere('q.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }
