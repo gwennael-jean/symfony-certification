@@ -11,7 +11,15 @@
 @import "components/forms/authentication-form";
 @import "components/alerts";
 @import "components/buttons";
+@import "components/cards";
 
-.main {
+.container-fluid {
+ @apply px-3;
+ padding-top: 64px !important;
+}
+
+.container {
+ @apply mx-auto;
+ width: 1150px;
  padding-top: 64px !important;
 }

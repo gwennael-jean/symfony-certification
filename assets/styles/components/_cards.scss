@@ -1,0 +1,30 @@
+@layer components {
+  .card {
+    @apply py-4 px-8 bg-white shadow-lg rounded-lg my-20;
+
+    .card-image {
+      @apply flex justify-center md:justify-end -mt-16;
+
+      img {
+        @apply w-20 h-20 object-cover rounded-full border-2 border-white;
+      }
+    }
+
+    .card-body {
+      @apply text-gray-600;
+
+      .card-title {
+        @apply text-gray-800 text-3xl font-semibold;
+      }
+
+      .card-text {
+        @apply mt-2;
+      }
+    }
+
+    .card-links {
+      @apply flex justify-end mt-4;
+    }
+  }
+
+}

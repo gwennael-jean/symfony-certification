@@ -3,11 +3,38 @@
 {% block title %}Hello DashboardController!{% endblock %}
 
 {% block body %}
-    {{ form_start(form) }}
-        {{ form_errors(form) }}
-        {{ form_row(form) }}
-        <button type="submit" class="btn btn-primary">
-            Finish
-        </button>
-    {{ form_end(form) }}
+    <div class="container">
+        <div class="card mt-0" data-controller="userquizz" data-userquizz-userquizz-value="{{ userQuizz.id }}">
+            {{ form_start(form, { attr: {'data-userquizz-target': 'form'} }) }}
+
+            <div class="card-body">
+                {{ form_errors(form) }}
+
+                {% for userQuestionField in form.userQuestions %}
+                    <div class="question" data-userquizz-target="question">
+                        <div class="card-title">
+                            {{ userQuestionField.vars.question.value }}
+                        </div>
+                        <div class="card-text">
+                            {{ form_row(userQuestionField.answers) }}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="card-links">
+                <button type="button" class="btn btn-secondary mr-2" data-action="userquizz#previous">
+                    Previous
+                </button>
+                <button type="button" class="btn btn-secondary mr-2" data-action="userquizz#next">
+                    Next
+                </button>
+                <button type="submit" class="btn btn-primary">
+                    Finish
+                </button>
+            </div>
+
+            {{ form_widget(form.currentQuestion, { attr: {'data-userquizz-target': 'current'} }) }}
+            {{ form_end(form) }}
+        </div>
+    </div>
 {% endblock %}

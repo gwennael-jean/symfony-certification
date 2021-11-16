@@ -4,12 +4,39 @@
 
 {% block body %}
     {% include '.components/topbar.html.twig' %}
+    <div class="container-fluid">
+        <div class="grid grid-cols-3 gap-4">
+            <div class="col-span-2">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="card-title">Quelques chiffres</h1>
+                        <p class="card-text">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae dolores deserunt ea doloremque natus error
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                {% for domain in domains %}
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="https://images.unsplash.com/photo-1499714608240-22fc6ad53fb2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80">
+                        </div>
+                        <div class="card-body">
+                            <h2 class="card-title">{{ domain.name }}</h2>
+                            <p class="card-text">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae dolores deserunt ea doloremque natus error
+                            </p>
+                        </div>
+                        <div class="card-links">
+                            <a href="{{ path('userquizz_generate_by_domain', { id: domain.id }) }}" class="text-xl font-medium text-indigo-500">
+                                {% trans %}Let's go{% endtrans %}
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
 
-    <div class="main">
-        {% for domain in domains %}
-            <a href="{{ path('userquizz_generate_by_domain', { id: domain.id }) }}" class="btn btn-primary">
-                {% trans %}Generate a quizz{% endtrans %} {{ domain.name }}
-            </a>
-        {% endfor %}
     </div>
 {% endblock %}
