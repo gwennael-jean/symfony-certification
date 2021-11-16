@@ -57,11 +57,21 @@ class UserQuizzController extends AbstractController
     #[Route('/user-quizz/{id}/update', name: 'userquizz_update', methods: ['POST'])]
     public function update(Request $request, UserQuizz $userQuizz): Response
     {
-        $this->getDoctrine()->getManager()->persist($userQuizz);
-        $this->getDoctrine()->getManager()->flush();
+        $form = $this->createForm(UserQuizzType::class, $userQuizz);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->persist($userQuizz);
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->json([
+                'success' => true
+            ]);
+        }
 
         return $this->json([
-            'success' => true
+            'success' => false
         ]);
     }
 }

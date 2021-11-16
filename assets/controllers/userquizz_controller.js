@@ -11,14 +11,14 @@ import { Controller } from 'stimulus';
  */
 
 export default class extends Controller {
-    static targets = [ "question" ]
+    static targets = [ "form", "current", "question" ]
 
     static values = {
         userquizz: Number
     }
 
     initialize() {
-        this.index = 0
+        this.index = this.currentTarget.value - 1
     }
 
     connect() {
@@ -42,24 +42,25 @@ export default class extends Controller {
     }
 
     showCurrentQuestion() {
-        this.questionTargets.forEach((element, index) => {
-            index === this.index
-                ? element.classList.remove('hidden')
-                : element.classList.add('hidden')
-        })
+        this.hideQuestions()
+        this.showQuestion(this.index)
+    }
+
+    hideQuestions() {
+        this.questionTargets.forEach((element, i) => {
+            element.classList.add('hidden')
+        });
+    }
+
+    showQuestion(index) {
+        this.questionTargets[index].classList.remove('hidden')
+        this.currentTarget.value = index + 1
     }
 
     updateUserQuizz() {
-        let r = new XMLHttpRequest();
-
-        r.open("POST", `/quizz/user-quizz/${this.userquizzValue}/update`, true);
-        r.onreadystatechange = function () {
-            if (r.readyState !== 4 || r.status !== 200)
-                return;
-
-            console.log(r.responseText);
-        };
-
-        r.send("banana=yellow");
+        fetch(`/quizz/user-quizz/${this.userquizzValue}/update`, {
+            method: 'POST',
+            body: new FormData(this.formTarget),
+        })
     }
 }

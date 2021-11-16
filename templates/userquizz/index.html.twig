@@ -4,8 +4,9 @@
 
 {% block body %}
     <div class="container">
-        {{ form_start(form) }}
         <div class="card mt-0" data-controller="userquizz" data-userquizz-userquizz-value="{{ userQuizz.id }}">
+            {{ form_start(form, { attr: {'data-userquizz-target': 'form'} }) }}
+
             <div class="card-body">
                 {{ form_errors(form) }}
 
@@ -31,7 +32,9 @@
                     Finish
                 </button>
             </div>
+
+            {{ form_widget(form.currentQuestion, { attr: {'data-userquizz-target': 'current'} }) }}
+            {{ form_end(form) }}
         </div>
-        {{ form_end(form) }}
     </div>
 {% endblock %}
