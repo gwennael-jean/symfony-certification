@@ -37,9 +37,15 @@ class UserQuizz
      */
     private $userQuestions;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $currentQuestion;
+
     public function __construct()
     {
         $this->userQuestions = new ArrayCollection();
+        $this->currentQuestion = 1;
     }
 
     public function getId(): ?int
@@ -97,6 +103,18 @@ class UserQuizz
                 $userQuestion->setUserQuizz(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCurrentQuestion(): ?int
+    {
+        return $this->currentQuestion;
+    }
+
+    public function setCurrentQuestion(int $currentQuestion): self
+    {
+        $this->currentQuestion = $currentQuestion;
 
         return $this;
     }
