@@ -1,0 +1,20 @@
+super.admin@mail.test:
+  email: super.admin@mail.test
+  password: azerty
+  roles: [ROLE_ADMIN]
+  isVerified: true
+
+user1@mail.test:
+  email: user1@mail.test
+  password: azerty
+  isVerified: true
+
+user2@mail.test:
+  email: user2@mail.test
+  password: azerty
+  isVerified: true
+
+user3@mail.test:
+  email: user3@mail.test
+  password: azerty
+  isVerified: false
