@@ -19,7 +19,7 @@ abstract class QuestionFixture extends AbstractFixture
         $category = (new Category())
             ->setName($data['category']);
 
-        foreach ($data['questions'] as $questionData) {
+        foreach ($data['questions'] as $questionKey => $questionData) {
             $question = (new Question())
                 ->setCategory($category)
                 ->setValue($questionData['question']);
@@ -35,6 +35,8 @@ abstract class QuestionFixture extends AbstractFixture
             $question->setDomains($this->getDomains());
 
             $manager->persist($question);
+
+            $this->addReference(sprintf('question.%s.%s', static::class, $questionKey), $question);
         }
 
         $manager->flush();

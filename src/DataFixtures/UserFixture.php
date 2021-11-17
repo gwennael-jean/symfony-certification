@@ -18,7 +18,7 @@ class UserFixture extends AbstractFixture
 
     public function load(ObjectManager $manager)
     {
-        foreach ($this->getData() as $data) {
+        foreach ($this->getData() as $key => $data) {
             $user = new User();
 
             $user
@@ -31,6 +31,8 @@ class UserFixture extends AbstractFixture
             }
 
             $manager->persist($user);
+
+            $this->addReference($key, $user);
         }
 
         $manager->flush();
