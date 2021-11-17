@@ -42,6 +42,11 @@ class UserQuizz
      */
     private $currentQuestion;
 
+    /**
+     * @ORM\OneToOne(targetEntity=UserQuizzResult::class, cascade={"persist", "remove"})
+     */
+    private $result;
+
     public function __construct()
     {
         $this->userQuestions = new ArrayCollection();
@@ -115,6 +120,18 @@ class UserQuizz
     public function setCurrentQuestion(int $currentQuestion): self
     {
         $this->currentQuestion = $currentQuestion;
+
+        return $this;
+    }
+
+    public function getResult(): ?UserQuizzResult
+    {
+        return $this->result;
+    }
+
+    public function setResult(?UserQuizzResult $result): self
+    {
+        $this->result = $result;
 
         return $this;
     }
