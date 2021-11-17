@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello DashboardController!{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="card mt-0">
+            <div class="card-body">
+                <div class="text-center">
+                    <div class="text-center text-8xl {{ userQuizz.result.success ? 'text-success' : 'text-error' }}">
+                        <i class="fas {{ userQuizz.result.success ? 'fa-thumbs-up' : 'fa-thumbs-down' }}"></i>
+                    </div>
+
+                    <div class="text-4xl">
+                        {{ (userQuizz.result.success ? 'quizz.result.title.success' : 'quizz.result.title.error') | trans }}
+                    </div>
+
+                    <div class="text-xl">
+                        {{ (userQuizz.result.success ? 'quizz.result.message.success' : 'quizz.result.message.error') | trans }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

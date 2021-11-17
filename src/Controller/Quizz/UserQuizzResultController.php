@@ -6,6 +6,7 @@ use App\Entity\Quizz\Domain;
 use App\Entity\Quizz\UserQuizz;
 use App\Form\UserQuizzType;
 use App\Service\UserQuizzGeneratorInterface;
+use App\Service\UserQuizzResult\UserQuizzResultComputerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,14 +15,23 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserQuizzResultController extends AbstractController
 {
     #[Route('/user-quizz/{id}/resultat', name: 'userquizz_result_show', requirements: ['id' => '\d+'])]
-    public function show(Request $request, UserQuizz $userQuizz): Response
+    public function show(UserQuizz $userQuizz): Response
     {
-        // TODO: Visualiser le résultat du quizz
+        return $this->render('userquizz/result.html.twig', [
+            'userQuizz' => $userQuizz,
+        ]);
     }
 
     #[Route('/user-quizz/{id}/finalisation', name: 'userquizz_result_compute', requirements: ['id' => '\d+'])]
-    public function compute(Request $request, UserQuizz $userQuizz): Response
+    public function compute(UserQuizz $userQuizz, UserQuizzResultComputerInterface $userQuizzResultComputer): Response
     {
-        // TODO: Calculer le score du quizz
+        $userQuizzResultComputer->compute($userQuizz);
+
+        $this->getDoctrine()->getManager()->persist($userQuizz);
+        $this->getDoctrine()->getManager()->flush();
+
+        return $this->redirectToRoute('userquizz_result_show', [
+            'id' => $userQuizz->getId()
+        ]);
     }
 }

@@ -18,23 +18,23 @@ class UserQuizzResult
     private $id;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", name="success")
      */
-    private $success;
+    private $isSuccess;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getSuccess(): ?bool
+    public function isSuccess(): ?bool
     {
-        return $this->success;
+        return $this->isSuccess;
     }
 
-    public function setSuccess(bool $success): self
+    public function setSuccess(bool $isSuccess): self
     {
-        $this->success = $success;
+        $this->isSuccess = $isSuccess;
 
         return $this;
     }
