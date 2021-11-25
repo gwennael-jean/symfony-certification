@@ -35,6 +35,7 @@ class UserAnswersType extends AbstractType implements DataTransformerInterface
         $userQuestion = $form->getParent()->getData();
 
         $view->vars['answers'] = $userQuestion->getQuestion()->getAnswers();
+        $view->vars['view'] = $options['view'];
     }
 
     public function configureOptions(OptionsResolver $resolver): void
@@ -42,6 +43,7 @@ class UserAnswersType extends AbstractType implements DataTransformerInterface
         $resolver->setDefaults([
             'compound' => false,
             'multiple' => true,
+            'view' => false,
         ]);
     }
 

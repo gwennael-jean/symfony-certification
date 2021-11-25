@@ -13,7 +13,9 @@ class UserQuestionType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder->add('answers', UserAnswersType::class);
+        $builder->add('answers', UserAnswersType::class, [
+            'view' => $options['view']
+        ]);
     }
 
     public function buildView(FormView $view, FormInterface $form, array $options)
@@ -30,6 +32,7 @@ class UserQuestionType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => UserQuestion::class,
+            'view' => false,
         ]);
     }
 }

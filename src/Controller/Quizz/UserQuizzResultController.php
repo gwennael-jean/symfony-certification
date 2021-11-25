@@ -17,8 +17,13 @@ class UserQuizzResultController extends AbstractController
     #[Route('/user-quizz/{id}/resultat', name: 'userquizz_result_show', requirements: ['id' => '\d+'])]
     public function show(UserQuizz $userQuizz): Response
     {
+        $form = $this->createForm(UserQuizzType::class, $userQuizz, [
+            'view' => true
+        ]);
+
         return $this->render('userquizz/result.html.twig', [
             'userQuizz' => $userQuizz,
+            'form' => $form->createView(),
         ]);
     }
 

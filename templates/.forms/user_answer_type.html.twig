@@ -7,7 +7,7 @@
     {% for answer in answers %}
         <div>
             <label>
-                <input type="checkbox" name="{{ full_name }}[]" value="{{ answer.id }}" {% if answer.id in value %}checked{% endif%} />
+                <input type="checkbox" name="{{ full_name }}[]" value="{{ answer.id }}" {% if answer.id in value %}checked{% endif%} {% if view %}disabled{% endif %} />
                 {{ answer.value }}
             </label>
         </div>

@@ -17,6 +17,9 @@ class UserQuizzType extends AbstractType
             ->add('currentQuestion', HiddenType::class)
             ->add('userQuestions', CollectionType::class, [
                 'entry_type' => UserQuestionType::class,
+                'entry_options' => [
+                    'view' => $options['view'],
+                ]
             ])
         ;
     }
@@ -25,6 +28,7 @@ class UserQuizzType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => UserQuizz::class,
+            'view' => false,
         ]);
     }
 
