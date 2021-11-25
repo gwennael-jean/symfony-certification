@@ -1,0 +1,29 @@
+@layer components {
+  .question-result {
+    @apply border-l-4 pl-2 mb-3 p-2;
+
+    .title {
+      @apply text-xl font-bold uppercase mb-1;
+    }
+
+    .question {
+      @apply mb-2;
+    }
+
+    &.success {
+      @apply border-green-500 bg-green-50;
+
+      .title {
+        @apply text-green-900;
+      }
+    }
+
+    &.error {
+      @apply border-red-500 bg-red-50;
+
+      .title {
+        @apply text-red-900;
+      }
+    }
+  }
+}

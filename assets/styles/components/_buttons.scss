@@ -1,6 +1,6 @@
 @layer components {
   .btn {
-    @apply rounded text-white p-2;
+    @apply rounded text-white p-2 inline-block ;
 
     &.btn-primary {
       @apply bg-primary;

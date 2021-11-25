@@ -8,18 +8,19 @@
 @import "base/body";
 @import "base/title";
 
+@import "components/question-result";
 @import "components/forms/authentication-form";
 @import "components/alerts";
 @import "components/buttons";
 @import "components/cards";
 
 .container-fluid {
- @apply px-3;
- padding-top: 64px !important;
+  @apply px-3;
+  padding-top: 64px !important;
 }
 
 .container {
- @apply mx-auto;
- width: 1150px;
- padding-top: 64px !important;
+  @apply mx-auto;
+  width: 1150px;
+  padding-top: 64px !important;
 }

@@ -19,7 +19,7 @@ class UserQuizzController extends AbstractController
     {
     }
 
-    #[Route('/user-quizz/{id}', name: 'userquizz_index')]
+    #[Route('/user-quizz/{id}', name: 'userquizz_index', requirements: ['id' => '\d+'])]
     public function index(Request $request, UserQuizz $userQuizz): Response
     {
         $form = $this->createForm(UserQuizzType::class, $userQuizz);
@@ -31,7 +31,9 @@ class UserQuizzController extends AbstractController
             $this->getDoctrine()->getManager()->persist($userQuizz);
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('dashboard');
+            return $this->redirectToRoute('userquizz_result_compute', [
+                'id' => $userQuizz->getId(),
+            ]);
         }
 
         return $this->render('userquizz/index.html.twig', [
@@ -40,7 +42,7 @@ class UserQuizzController extends AbstractController
         ]);
     }
 
-    #[Route('/user-quizz/domain/{id}/generate', name: 'userquizz_generate_by_domain')]
+    #[Route('/user-quizz/domain/{id}/generate', name: 'userquizz_generate_by_domain', requirements: ['id' => '\d+'])]
     public function generateByDomain(Domain $domain): Response
     {
         $userQuizz = ($this->userQuizzGenerator->generateByDomain($domain))
@@ -54,7 +56,7 @@ class UserQuizzController extends AbstractController
         ]);
     }
 
-    #[Route('/user-quizz/{id}/update', name: 'userquizz_update', methods: ['POST'])]
+    #[Route('/user-quizz/{id}/update', name: 'userquizz_update', methods: ['POST'], requirements: ['id' => '\d+'])]
     public function update(Request $request, UserQuizz $userQuizz): Response
     {
         $form = $this->createForm(UserQuizzType::class, $userQuizz);

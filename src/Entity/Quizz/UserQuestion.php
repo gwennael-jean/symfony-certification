@@ -36,6 +36,11 @@ class UserQuestion
      */
     private $answers;
 
+    /**
+     * @ORM\OneToOne(targetEntity=UserQuestionResult::class, mappedBy="userQuestion", cascade={"persist", "remove"})
+     */
+    private $result;
+
     public function __construct()
     {
         $this->answers = new ArrayCollection();
@@ -96,6 +101,28 @@ class UserQuestion
                 $answer->setUserQuestion(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getResult(): ?UserQuestionResult
+    {
+        return $this->result;
+    }
+
+    public function setResult(?UserQuestionResult $result): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($result === null && $this->result !== null) {
+            $this->result->setUserQuestion(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($result !== null && $result->getUserQuestion() !== $this) {
+            $result->setUserQuestion($this);
+        }
+
+        $this->result = $result;
 
         return $this;
     }
